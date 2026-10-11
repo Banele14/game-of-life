@@ -1,9 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { readings } from "./helpers";
+import { openApp, readings } from "./helpers";
 
 test("no WCAG A/AA violations", async ({ page }) => {
-  await page.goto("/");
+  await openApp(page);
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
     .analyze();
@@ -12,7 +12,7 @@ test("no WCAG A/AA violations", async ({ page }) => {
 });
 
 test("works from the keyboard alone", async ({ page }) => {
-  await page.goto("/");
+  await openApp(page);
 
   await page.keyboard.press("Tab");
   await expect(page.getByRole("button", { name: "Play" })).toBeFocused();

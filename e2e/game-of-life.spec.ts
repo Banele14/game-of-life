@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { getBoard, readings } from "./helpers";
+import { getBoard, openApp, readings } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await openApp(page);
 });
 
 test("opens on the Gosper glider gun, paused", async ({ page }) => {

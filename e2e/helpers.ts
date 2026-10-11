@@ -1,5 +1,23 @@
 import { expect, type Page } from "@playwright/test";
 
+// The page is pre-rendered, so the controls are on screen a moment before
+// React hydrates and attaches its handlers. A key press in that gap does
+// nothing (this made the keyboard test flaky on mobile). The board is only
+// drawn after hydration, so wait for the first non-transparent pixel.
+export async function openApp(page: Page) {
+  await page.goto("/");
+  await page.waitForFunction(() => {
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return false;
+    const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    for (let alpha = 3; alpha < data.length; alpha += 4) {
+      if (data[alpha] > 0) return true;
+    }
+    return false;
+  });
+}
+
 // Board helpers that work in grid coordinates, converting to screen
 // positions the same way the app does.
 export async function getBoard(page: Page) {
