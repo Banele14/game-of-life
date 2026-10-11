@@ -1,0 +1,60 @@
+.stats {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 16px;
+}
+
+.stats div {
+  display: grid;
+  gap: 1px;
+}
+
+.stats dt {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.stats dd {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 4ch;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.idle {
+  background: var(--text-muted);
+}
+
+.extinct {
+  background: var(--extinct);
+}
+
+.running {
+  background: var(--running);
+  box-shadow: 0 0 10px var(--running);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .running {
+    animation: none;
+  }
+}

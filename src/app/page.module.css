@@ -1,0 +1,31 @@
+.page {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 32px 24px 28px;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .keys {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .page {
+    padding: 20px 16px;
+  }
+}

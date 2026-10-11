@@ -1,0 +1,8 @@
+.canvas {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  cursor: crosshair;
+  /* let a finger drag draw instead of scrolling the page */
+  touch-action: none;
+}
