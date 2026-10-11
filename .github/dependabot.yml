@@ -4,11 +4,25 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Minor and patch updates are grouped. Majors come as separate PRs so one
+    # breaking change can't hold up the rest.
     groups:
       development-dependencies:
         dependency-type: development
+        update-types: [minor, patch]
       production-dependencies:
         dependency-type: production
+        update-types: [minor, patch]
+    ignore:
+      # typescript-eslint (via eslint-config-next) doesn't support these majors
+      # yet, so lint crashes. Upgrade by hand once Next supports them.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      # Keep the Node types on the same major as .nvmrc.
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /
